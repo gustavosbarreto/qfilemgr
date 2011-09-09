@@ -1,0 +1,108 @@
+QToolBar {
+    background-color: palette(window);
+}
+
+#Window {
+    background-color: #ced8e0;
+}
+
+IconsView {
+    padding: 0px;
+    padding-top: 6px;
+    padding-left: 6px;
+    border: 0px;
+    background-color: palette(base);
+}
+
+IconsView::item {
+		border: 1px solid transparent;
+		padding: 4px;
+}
+
+IconsView::item:hover {
+    background: qlineargradient(x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1,
+                                stop: 0 #ffffff,
+                                stop: 0.30 #ffffff,
+                                stop: 1 #ebf6ff);
+    border: 1px solid #ced8e0;	
+    border-radius: 5px;		
+}
+
+IconsView::item:selected {
+    border: 1px solid #ced8e0;
+    background-color: #ebf6ff;
+    border-radius: 5px;
+    color: palette(text);
+}
+
+#detailsFrame {
+    border: 0px;
+    background-color: #fcfcfc;
+}
+
+#detailsFrame #type {
+    color: #5a6779;
+}
+
+LocationBar {
+    border: 1px solid #ced8e0;
+    background-color: palette(base);
+    padding-left: 4px;
+}
+
+LocationBar QPushButton {
+    padding: 4px;
+    border: 0px;
+    background-color: palette(base);
+}
+
+LocationBar QPushButton:hover {
+    border: 0px;
+    border-right: 1px solid #ced8e0;
+    border-left: 1px solid #ced8e0;
+    background: qlineargradient(x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1,
+                                stop: 0 #ffffff,
+                                stop: 0.30 #ffffff,
+                                stop: 1 #ebf6ff);
+}
+
+SideBar {
+    border: 0px;
+    background-color: #fcfcfc;
+}
+
+SideBar::item {
+    color: palette(text);
+    margin: 4px;
+    margin-right: 1px;
+    border: 1px solid transparent;
+}
+
+SideBar::item:hover {
+    background: qlineargradient(x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1,
+                                stop: 0 #ffffff,
+                                stop: 0.30 #ffffff,
+                                stop: 1 #ebf6ff);
+    border: 1px solid #ced8e0;
+    border-right: 0px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+SideBar::item:selected {
+    border: 1px solid #ced8e0;
+    border-right: 0px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-color: #ebf6ff;
+    color: palette(text);
+}
