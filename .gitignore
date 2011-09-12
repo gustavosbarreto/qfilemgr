@@ -1,0 +1,9 @@
+moc_*.cpp
+*.o
+*.so
+*~
+Makefile
+*.qm
+qrc_*
+src/ui_*
+ostd-fm
