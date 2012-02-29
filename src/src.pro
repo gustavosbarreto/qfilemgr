@@ -3,7 +3,7 @@ CONFIG += link_pkgconfig qdbus
 
 DEFINES += SN_API_NOT_YET_FROZEN
 
-TARGET = ostd-fm
+TARGET = razorqt-fm
 
 RESOURCES += ../resources.qrc
 
