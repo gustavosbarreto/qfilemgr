@@ -1,6 +1,5 @@
 INCLUDEPATH += $$PWD/
 
-PKGCONFIG += libstartup-notification-1.0
 DEFINES += SN_API_NOT_YET_FROZEN
 
 FORMS += \
