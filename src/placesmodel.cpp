@@ -52,7 +52,7 @@ QString fileSizeToString(quint64 bytes)
 struct Place
 {
     QString name;
-    QString icon;
+    QIcon icon;
     QString path;
     PlacesModel::Type type;
     QVariant data;
@@ -67,7 +67,7 @@ PlacesModel::PlacesModel(QObject *parent):
     {
         Place *place = new Place;
         place->name = trUtf8("My Documents");
-        place->icon = ":/images/folder-documents.png";
+        place->icon = QIcon::fromTheme("user-home");
         place->path = QDir::homePath();
         m_places.append(place);
     }
@@ -139,7 +139,7 @@ QVariant PlacesModel::data(const QModelIndex &index, int role) const
         case Qt::DisplayRole:
             return m_places.at(index.row())->name;
         case Qt::DecorationRole:
-            return QIcon(m_places.at(index.row())->icon);
+            return m_places.at(index.row())->icon;
         case PathRole:
             return m_places.at(index.row())->path;
         case TypeRole:
