@@ -72,14 +72,6 @@ PlacesModel::PlacesModel(QObject *parent):
         m_places.append(place);
     }
 
-    {
-        Place *place = new Place;
-        place->name = trUtf8("Remote connections");
-        place->icon = ":/images/folder-remote.png";
-        place->path = "/var/lib/ossystems/connections";
-//        m_places.append(place);
-    }
-
     connect(FileManager::self(), SIGNAL(rootPathChanged(const QModelIndex &)),
             SLOT(updateCurrentPlacePath(const QModelIndex &)));
 }
