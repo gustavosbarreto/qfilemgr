@@ -53,11 +53,7 @@ void DetailsFrame::updateInfo(const QModelIndex &index)
     if (name.length() > 80)
         name = metrics.elidedText(name, Qt::ElideRight, metrics.averageCharWidth() * 80);
 
-    QPixmap icon = QPixmap(index.data(FileSystemModel::MimeTypeIconRole).toString());
-    if (placeIndex.isValid())
-        icon = qvariant_cast<QIcon>(placeIndex.data(Qt::DecorationRole)).pixmap(48, 48);
-
-    ui.icon->setPixmap(icon);
+    ui.icon->setPixmap(qvariant_cast<QIcon>(index.data(Qt::DecorationRole)).pixmap(48, 48));
     ui.name->setText(name);
     ui.type->setText(index.data(FileSystemModel::MimeTypeDescriptionRole).toString());
 }

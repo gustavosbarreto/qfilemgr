@@ -18,6 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+#include <gio/gio.h>
+
 #include <QApplication>
 #include <QFile>
 #include <QSettings>
@@ -31,6 +33,9 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
+    g_thread_init(NULL);
+    g_type_init();
 
     // Aplica o style
     QSettings settings(QSettings::SystemScope, "ossystems", "appearance");

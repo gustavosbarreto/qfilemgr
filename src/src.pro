@@ -1,5 +1,6 @@
 CONFIG += link_pkgconfig qdbus
 #PKGCONFIG += OSGuiWidgets desktopentry libstartup-notification-1.0 cuterpcclient
+PKGCONFIG += gio-2.0
 
 DEFINES += SN_API_NOT_YET_FROZEN
 

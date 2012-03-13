@@ -18,6 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+#include <gio/gio.h>
+
 #include "filesystemmodel.hpp"
 #include "mimedetector.hpp"
 #include "fileitem.hpp"
@@ -49,18 +51,19 @@ QVariant FileSystemModel::data(const QModelIndex &index, int role) const
 {
     if (role == Qt::DecorationRole)
     {
-        MimeType *mimeType = mimeDetector->mimeTypeForFileName(index.data(QFileSystemModel::FilePathRole).toString());
-        return QIcon(mimeType->icon());
+        GFile *file = g_file_new_for_path(index.data(QFileSystemModel::FilePathRole).toString().toUtf8());
+        GFileInfo *info = g_file_query_info(file, "standard::*", G_FILE_QUERY_INFO_NONE, NULL, NULL);
+        GIcon *icon = g_file_info_get_icon(info);
+        gchar const *const *names = g_themed_icon_get_names(G_THEMED_ICON(icon));
+        for (int i = 0; names[i]; i++) {
+            if (QIcon::hasThemeIcon(names[i]))
+                return QIcon::fromTheme(names[i]);
+        }
     }
     else if (role == MimeTypeDescriptionRole)
     {
         MimeType *mimeType = mimeDetector->mimeTypeForFileName(index.data(QFileSystemModel::FilePathRole).toString());
         return mimeType->description();
-    }
-    else if (role == MimeTypeIconRole)
-    {
-        MimeType *mimeType = mimeDetector->mimeTypeForFileName(index.data(QFileSystemModel::FilePathRole).toString());
-        return mimeType->icon();
     }
     else if (role == DefaultApplicationNameRole)
     {
