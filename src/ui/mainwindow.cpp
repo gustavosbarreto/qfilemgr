@@ -44,6 +44,9 @@ MainWindow::MainWindow(QWidget *parent):
 
     setContextMenuPolicy(Qt::NoContextMenu);
 
+    ui.actionBack->setIcon(QIcon::fromTheme("go-previous", QIcon(":/images/go-previous.png")));
+    ui.actionForward->setIcon(QIcon::fromTheme("go-next", QIcon(":/images/go-next.png")));
+
     connect(ui.actionBack, SIGNAL(triggered()), SLOT(goBack()));
     connect(ui.actionForward, SIGNAL(triggered()), SLOT(goForward()));
 
