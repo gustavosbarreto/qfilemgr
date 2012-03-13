@@ -178,7 +178,7 @@ void PlacesModel::deviceMounted(HalDevice *device)
 
     Place *place = new Place;
     place->name = name;
-    place->icon = ":/images/drive-removable-media-usb.png";
+    place->icon = QIcon(":/images/drive-removable-media-usb.png");
     place->path = device->getPropertyString("volume.mount_point");
     place->type = VolumeType;
     place->data = device->udi();
