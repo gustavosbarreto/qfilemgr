@@ -98,19 +98,7 @@ void IconsViewController::triggerItem(const QModelIndex &index)
     if (QFileInfo(filePath).isDir())
         model()->setRootPathOwn(filePath);
     else
-    {
-        #if 0
-        QSettings s(index.data(FileSystemModel::DefaultApplicationDesktopFileRole).toString(), OSDesktopEntryFormat);
-        s.beginGroup("Desktop Entry");
-        QString exec = s.value("Exec").toString();
-        exec = exec.left(exec.indexOf("\%") - 1);
-
-        QStringList args;
-        args << filePath;
-
-        ProcessLauncher::startDetached(exec, args);
-        #endif
-    }
+        QProcess::startDetached("xdg-open", QStringList() << filePath);
 }
 
 void IconsViewController::selectItem(const QModelIndex &index)
