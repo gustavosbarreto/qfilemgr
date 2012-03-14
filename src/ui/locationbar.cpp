@@ -62,6 +62,7 @@ LocationBar::LocationBar(QWidget *parent):
 
     m_icon = new QLabel(this);
     m_icon->setPixmap(QPixmap(":/images/ostd-fm.png").scaled(16, 16));
+    m_icon->setStyleSheet("margin-left: 4px");
     l->addWidget(m_icon);
 
     connect(FileManager::self(), SIGNAL(rootPathChanged(const QModelIndex &)),
