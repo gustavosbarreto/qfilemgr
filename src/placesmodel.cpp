@@ -18,6 +18,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+#include <gio/gio.h>
+
 #include "placesmodel.hpp"
 #include "filemanager.hpp"
 //#include "devicemanager.hpp"
@@ -70,6 +72,44 @@ PlacesModel::PlacesModel(QObject *parent):
         place->icon = QIcon::fromTheme("user-home");
         place->path = QDir::homePath();
         m_places.append(place);
+    }
+
+    QFile file(QDir::homePath() + "/.config/user-dirs.dirs");
+    file.open(QFile::ReadOnly);
+
+    QTextStream in (&file);
+    while (!in.atEnd())
+    {
+        QString line = in.readLine();
+        QRegExp exp("^XDG_(.*)=\"(.*)\"$");
+        if (exp.exactMatch(line))
+        {
+            if ((QStringList() << "DESKTOP_DIR" << "DOWNLOAD_DIR" << "DOCUMENTS_DIR"
+                 << "MUSIC_DIR" << "PICTURES_DIR" << "VIDEOS_DIR").contains(exp.cap(1)))
+            {
+                QString xdgDir = exp.cap(2).replace("$HOME", QDir::homePath());
+                if (!QFile::exists(xdgDir))
+                    continue;
+
+                Place *place = new Place;
+                place->name = QDir(xdgDir).dirName();
+                place->path = xdgDir;
+
+                GFile *file = g_file_new_for_path(xdgDir.toUtf8());
+                GFileInfo *info = g_file_query_info(file, "standard::*", G_FILE_QUERY_INFO_NONE, NULL, NULL);
+                GIcon *icon = g_file_info_get_icon(info);
+                gchar const *const *names = g_themed_icon_get_names(G_THEMED_ICON(icon));
+                for (int i = 0; names[i]; i++) {
+                    if (QIcon::hasThemeIcon(names[i]))
+                    {
+                        place->icon = QIcon::fromTheme(names[i]);
+                        break;
+                    }
+                }
+
+                m_places.append(place);
+            }
+        }
     }
 
     connect(FileManager::self(), SIGNAL(rootPathChanged(const QModelIndex &)),
