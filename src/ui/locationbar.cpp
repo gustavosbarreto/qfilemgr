@@ -53,7 +53,7 @@ LocationBar::LocationBar(QWidget *parent):
 
     QFrame *w = new QFrame(this);
     w->setStyleSheet("QFrame { background-color: transparent; }");
-    w->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+    w->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::MinimumExpanding);
 
     QHBoxLayout *l = new QHBoxLayout(w);
     l->setContentsMargins(0, 0, 0, 0);
@@ -119,7 +119,7 @@ void LocationBar::updateButtons(int startIndex)
                     ((QBoxLayout*)widget()->layout())->insertWidget(widget()->layout()->count() - 1, item->arrow);
                 }
 
-                setFixedHeight(widget()->sizeHint().height() + 2);
+                setFixedHeight(widget()->sizeHint().height() + 4);
 
                 m_buttons.append(item);
             }
